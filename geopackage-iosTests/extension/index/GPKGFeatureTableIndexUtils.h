@@ -11,6 +11,6 @@
 
 @interface GPKGFeatureTableIndexUtils : NSObject
 
-+(void) testIndexerWithGeoPackage: (GPKGGeoPackage *) geoPackage;
++(void) testIndexWithGeoPackage: (GPKGGeoPackage *) geoPackage;
 
 @end
