@@ -33,10 +33,6 @@
   return self;
 }
 
-- (void)dealloc {
-  [self close];
-}
-
 - (void)close {
   [self.connectionPool close];
 }
