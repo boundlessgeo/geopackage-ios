@@ -145,7 +145,7 @@ NSInteger const GPKG_TEST_SETUP_CREATE_EXTENSIONS_COUNT = 3;
 +(void) setUpCreateFeaturesWithGeoPackage: (GPKGGeoPackage *) geoPackage{
     
     // Get existing SRS objects
-    GPKGSpatialReferenceSystemDao * srsDao = [geoPackage getSpatialReferenceSystemDao];
+    GPKGSpatialReferenceSystemDao * srsDao = [geoPackage spatialReferenceSystemDao];
     
     GPKGSpatialReferenceSystem * epsgSrs = (GPKGSpatialReferenceSystem *)[srsDao queryForIdObject:[NSNumber numberWithInt:4326]];
     GPKGSpatialReferenceSystem * undefinedCartesianSrs = (GPKGSpatialReferenceSystem *)[srsDao queryForIdObject:[NSNumber numberWithInt:-1]];
@@ -159,7 +159,7 @@ NSInteger const GPKG_TEST_SETUP_CREATE_EXTENSIONS_COUNT = 3;
     [geoPackage createGeometryColumnsTable];
     
     // Create new Contents
-    GPKGContentsDao * contentsDao = [geoPackage getContentsDao];
+    GPKGContentsDao * contentsDao = [geoPackage contentsDao];
     
     GPKGContents * point2dContents = [[GPKGContents alloc] init];
     [point2dContents setTableName:@"point2d"];
@@ -230,7 +230,7 @@ NSInteger const GPKG_TEST_SETUP_CREATE_EXTENSIONS_COUNT = 3;
     [contentsDao create:lineString3dMContents];
     
     // Create new Geometry Columns
-    GPKGGeometryColumnsDao * geometryColumnsDao = [geoPackage getGeometryColumnsDao];
+    GPKGGeometryColumnsDao * geometryColumnsDao = [geoPackage geometryColumnsDao];
     
     GPKGGeometryColumns * point2dGeometryColumns = [[GPKGGeometryColumns alloc] init];
     [point2dGeometryColumns setContents:point2dContents];
@@ -279,7 +279,7 @@ NSInteger const GPKG_TEST_SETUP_CREATE_EXTENSIONS_COUNT = 3;
 +(void) setUpCreateTilesWithGeoPackage: (GPKGGeoPackage *) geoPackage{
     
     // Get existing SRS objects
-    GPKGSpatialReferenceSystemDao * srsDao = [geoPackage getSpatialReferenceSystemDao];
+    GPKGSpatialReferenceSystemDao * srsDao = geoPackage.spatialReferenceSystemDao;
     
     GPKGSpatialReferenceSystem * epsgSrs = (GPKGSpatialReferenceSystem *)[srsDao queryForIdObject:[NSNumber numberWithInt:4326]];
     
@@ -290,7 +290,7 @@ NSInteger const GPKG_TEST_SETUP_CREATE_EXTENSIONS_COUNT = 3;
     [geoPackage createTileMatrixTable];
     
     // Create new Contents
-    GPKGContentsDao * contentsDao = [geoPackage getContentsDao];
+    GPKGContentsDao * contentsDao = geoPackage.contentsDao;
     
     
     GPKGContents * contents = [[GPKGContents alloc] init];

@@ -79,63 +79,63 @@
  *
  *  @return feature table names
  */
-- (NSArray *)getFeatureTables;
+- (NSArray *)featureTables;
 
 /**
  *  Get the tile tables
  *
  *  @return tile table names
  */
-- (NSArray *)getTileTables;
+- (NSArray *)tileTables;
 
 /**
  *  Get the feature and tile tables
  *
  *  @return feature and tile table names
  */
-- (NSArray *)getTables;
+- (NSArray *)tables;
 
 /**
  *  Get the feature table count
  *
  *  @return number of feature tables
  */
-- (int)getFeatureTableCount;
+- (int)featureTableCount;
 
 /**
  *  Get the tile table count
  *
  *  @return number of tile tables
  */
-- (int)getTileTableCount;
+- (int)tileTableCount;
 
 /**
  *  Get the feature and tile table count
  *
  *  @return number of feature and tile tables
  */
-- (int)getTableCount;
+- (int)tableCount;
 
 /**
  *  Get a Spatial Reference System DAO
  *
  *  @return Spatial Reference System DAO
  */
-- (GPKGSpatialReferenceSystemDao *)getSpatialReferenceSystemDao;
+- (GPKGSpatialReferenceSystemDao *)spatialReferenceSystemDao;
 
 /**
  *  Get a Contents DAO
  *
  *  @return Contents DAO
  */
-- (GPKGContentsDao *)getContentsDao;
+- (GPKGContentsDao *)contentsDao;
 
 /**
  *  Get a Geometry Columns DAO
  *
  *  @return Geometry Columns DAO
  */
-- (GPKGGeometryColumnsDao *)getGeometryColumnsDao;
+- (GPKGGeometryColumnsDao *)geometryColumnsDao;
 
 /**
  *  Create the Geometry Columns table if it does not already exist

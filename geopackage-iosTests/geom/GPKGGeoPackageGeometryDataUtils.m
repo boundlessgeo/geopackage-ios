@@ -27,7 +27,7 @@
 
 +(void) testReadWriteBytesWithGeoPackage: (GPKGGeoPackage *) geoPackage{
     
-    GPKGGeometryColumnsDao * geometryColumnsDao = [geoPackage getGeometryColumnsDao];
+    GPKGGeometryColumnsDao * geometryColumnsDao = geoPackage.geometryColumnsDao;
     
     if([geometryColumnsDao tableExists]){
         GPKGResultSet * results = [geometryColumnsDao queryForAll];
