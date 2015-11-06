@@ -542,8 +542,8 @@
   GPKGGeoPackage *geoPackage = [self open:name];
   if (geoPackage != nil) {
     @try {
-      if (![[geoPackage getSpatialReferenceSystemDao] tableExists] ||
-          ![[geoPackage getContentsDao] tableExists]) {
+      if (![geoPackage.spatialReferenceSystemDao tableExists] ||
+          ![geoPackage.contentsDao tableExists]) {
         [NSException raise:@"Invalid GeoPackage"
                     format:@"Invalid GeoPackage database file. Does not "
                            @"contain required tables: %@ & %@, Database: %@",

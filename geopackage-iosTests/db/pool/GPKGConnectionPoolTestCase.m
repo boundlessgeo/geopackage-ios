@@ -14,7 +14,7 @@
 
 - (void)testNestedQuery {
 
-  NSArray *featureTables = [self.geoPackage getFeatureTables];
+  NSArray *featureTables = self.geoPackage.featureTables;
   for (NSString *featureTable in featureTables) {
 
     GPKGFeatureDao *featureDao =
@@ -27,7 +27,7 @@
       GPKGFeatureRow *featureRow = [featureDao getFeatureRow:featureResults];
       [GPKGTestUtils assertNotNil:featureRow];
 
-      NSArray *tileTables = [self.geoPackage getTileTables];
+      NSArray *tileTables = self.geoPackage.tileTables;
       for (NSString *tileTable in tileTables) {
 
         GPKGTileDao *tileDao =
@@ -57,7 +57,7 @@
   dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0),
                  ^{
 
-                   NSArray *tileTables = [self.geoPackage getTileTables];
+                   NSArray *tileTables = [self.geoPackage tileTables];
                    for (NSString *tileTable in tileTables) {
 
                      GPKGTileDao *tileDao =
@@ -77,7 +77,7 @@
 
                  });
 
-  NSArray *featureTables = [self.geoPackage getFeatureTables];
+  NSArray *featureTables = [self.geoPackage featureTables];
   for (NSString *featureTable in featureTables) {
 
     GPKGFeatureDao *featureDao =
@@ -98,9 +98,8 @@
 
 - (void)testNestedUpdate {
 
-  NSArray *featureTables = [self.geoPackage getFeatureTables];
+  NSArray *featureTables = [self.geoPackage featureTables];
   for (NSString *featureTable in featureTables) {
-
     GPKGFeatureDao *featureDao =
         [self.geoPackage getFeatureDaoWithTableName:featureTable];
     GPKGResultSet *featureResults = [featureDao queryForAll];
@@ -134,7 +133,7 @@
  */
 - (void)testNestedQueryAndUpdateFailure {
 
-  NSArray *featureTables = [self.geoPackage getFeatureTables];
+  NSArray *featureTables = [self.geoPackage featureTables];
   for (NSString *featureTable in featureTables) {
 
     GPKGFeatureDao *featureDao =
@@ -147,7 +146,7 @@
       GPKGFeatureRow *featureRow = [featureDao getFeatureRow:featureResults];
       [GPKGTestUtils assertNotNil:featureRow];
 
-      NSArray *tileTables = [self.geoPackage getTileTables];
+      NSArray *tileTables = [self.geoPackage tileTables];
       for (NSString *tileTable in tileTables) {
 
         GPKGTileDao *tileDao =
@@ -189,7 +188,7 @@
 
 - (void)testTransactionUpdateCommit {
     
-    NSArray * featureTables = [self.geoPackage getFeatureTables];
+    NSArray * featureTables = self.geoPackage.featureTables;
     for(NSString * featureTable in featureTables){
         
         GPKGFeatureDao * featureDao = [self.geoPackage getFeatureDaoWithTableName:featureTable];
@@ -209,7 +208,7 @@
 
 - (void)testTransactionUpdateRollback {
     
-    NSArray * featureTables = [self.geoPackage getFeatureTables];
+    NSArray * featureTables = [self.geoPackage featureTables];
     for(NSString * featureTable in featureTables){
         
         GPKGFeatureDao * featureDao = [self.geoPackage getFeatureDaoWithTableName:featureTable];
@@ -229,7 +228,7 @@
 
 - (void)testQueryTransactionUpdateCommit {
     
-    NSArray * featureTables = [self.geoPackage getFeatureTables];
+    NSArray * featureTables = [self.geoPackage featureTables];
     for(NSString * featureTable in featureTables){
         
         GPKGFeatureDao * featureDao = [self.geoPackage getFeatureDaoWithTableName:featureTable];
@@ -256,7 +255,7 @@
 
 - (void)testQueryTransactionUpdateRollback {
     
-    NSArray * featureTables = [self.geoPackage getFeatureTables];
+    NSArray * featureTables = [self.geoPackage featureTables];
     for(NSString * featureTable in featureTables){
         
         GPKGFeatureDao * featureDao = [self.geoPackage getFeatureDaoWithTableName:featureTable];
@@ -283,7 +282,7 @@
 
 - (void)testTransactionChunkUpdateCommit {
     
-    NSArray * featureTables = [self.geoPackage getFeatureTables];
+    NSArray * featureTables = self.geoPackage.featureTables;
     for(NSString * featureTable in featureTables){
         
         GPKGFeatureDao * featureDao = [self.geoPackage getFeatureDaoWithTableName:featureTable];
@@ -299,7 +298,7 @@
 
 - (void)testTransactionChunkUpdateRollback {
     
-    NSArray * featureTables = [self.geoPackage getFeatureTables];
+    NSArray * featureTables = self.geoPackage.featureTables;
     for(NSString * featureTable in featureTables){
         
         GPKGFeatureDao * featureDao = [self.geoPackage getFeatureDaoWithTableName:featureTable];

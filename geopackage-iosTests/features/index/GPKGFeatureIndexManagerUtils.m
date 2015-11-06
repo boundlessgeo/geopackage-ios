@@ -26,7 +26,7 @@
 +(void) testIndexWithGeoPackage: (GPKGGeoPackage *) geoPackage andFeatureIndexType: (enum GPKGFeatureIndexType) type{
     
     // Test indexing each feature table
-    NSArray * featureTables = [geoPackage getFeatureTables];
+    NSArray * featureTables = geoPackage.featureTables;
     for(NSString * featureTable in featureTables){
      
         GPKGFeatureDao * featureDao = [geoPackage getFeatureDaoWithTableName:featureTable];

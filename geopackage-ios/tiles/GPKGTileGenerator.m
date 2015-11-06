@@ -106,7 +106,7 @@
     GPKGTileMatrixSet * tileMatrixSet = nil;
     if(![tileMatrixSetDao tableExists] || ![tileMatrixSetDao idExists:self.tableName]){
         // Create the web mercator srs if needed
-        GPKGSpatialReferenceSystemDao * srsDao = [self.geoPackage getSpatialReferenceSystemDao];
+        GPKGSpatialReferenceSystemDao * srsDao = [self.geoPackage spatialReferenceSystemDao];
         [srsDao getOrCreateWithSrsId:[NSNumber numberWithInt:PROJ_EPSG_WEB_MERCATOR]];
         // Create the tile table
         tileMatrixSet = [self.geoPackage createTileTableWithTableName:self.tableName andContentsBoundingBox:self.boundingBox andContentsSrsId:[NSNumber numberWithInt:PROJ_EPSG_WORLD_GEODETIC_SYSTEM] andTileMatrixSetBoundingBox:self.webMercatorBoundingBox andTileMatrixSetSrsId:[NSNumber numberWithInt:PROJ_EPSG_WEB_MERCATOR]];
@@ -159,7 +159,7 @@
         } else{
             // Update the contents last modified date
             [contents setLastChange:[NSDate date]];
-            GPKGContentsDao * contentsDao = [self.geoPackage getContentsDao];
+            GPKGContentsDao * contentsDao = self.geoPackage.contentsDao;
             [contentsDao update:contents];
         }
         
@@ -222,7 +222,7 @@
     GPKGTileMatrixSetDao * tileMatrixSetDao = [self.geoPackage getTileMatrixSetDao];
     GPKGContents * contents = [tileMatrixSetDao getContents:tileMatrixSet];
     
-    GPKGContentsDao * contentsDao = [self.geoPackage getContentsDao];
+    GPKGContentsDao * contentsDao = self.geoPackage.contentsDao;
     GPKGProjectionTransform * transformContentsToWgs84 = [[GPKGProjectionTransform alloc] initWithFromProjection:[contentsDao getProjection:contents] andToEpsg:PROJ_EPSG_WORLD_GEODETIC_SYSTEM];
     
     // Combine the existing content and request bounding boxes

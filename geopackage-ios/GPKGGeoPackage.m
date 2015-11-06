@@ -39,7 +39,7 @@
   [self.database close];
 }
 
-- (NSArray *)getFeatureTables {
+- (NSArray *)featureTables {
   NSArray *tables = nil;
   GPKGGeometryColumnsDao *dao = [self getGeometryColumnsDao];
   if ([dao tableExists]) {
@@ -50,7 +50,7 @@
   return tables;
 }
 
-- (NSArray *)getTileTables {
+- (NSArray *)tileTables {
   NSArray *tables = nil;
   GPKGTileMatrixSetDao *dao = [self getTileMatrixSetDao];
   if ([dao tableExists]) {
@@ -61,14 +61,14 @@
   return tables;
 }
 
-- (NSArray *)getTables {
+- (NSArray *)tables {
   NSMutableArray *tables = [[NSMutableArray alloc] init];
-  [tables addObjectsFromArray:[self getFeatureTables]];
-  [tables addObjectsFromArray:[self getTileTables]];
+  [tables addObjectsFromArray:self.featureTables];
+  [tables addObjectsFromArray:self.tileTables];
   return tables;
 }
 
-- (int)getFeatureTableCount {
+- (int)featureTableCount {
   int count = 0;
   GPKGGeometryColumnsDao *dao = [self getGeometryColumnsDao];
   if ([dao tableExists]) {
@@ -77,7 +77,7 @@
   return count;
 }
 
-- (int)getTileTableCount {
+- (int)tileTableCount {
   int count = 0;
   GPKGTileMatrixSetDao *dao = [self getTileMatrixSetDao];
   if ([dao tableExists]) {
@@ -86,8 +86,8 @@
   return count;
 }
 
-- (int)getTableCount {
-  int count = [self getFeatureTableCount] + [self getTileTableCount];
+- (int)tableCount {
+  int count = self.featureTableCount + self.tileTableCount;
   return count;
 }
 
@@ -175,7 +175,7 @@ createFeatureTableWithGeometryColumns:(GPKGGeometryColumns *)geometryColumns
   return geometryColumns;
 }
 
-- (GPKGTileMatrixSetDao *)getTileMatrixSetDao {
+- (GPKGTileMatrixSetDao *)tileMatrixSetDao {
   return [[GPKGTileMatrixSetDao alloc] initWithDatabase:self.database];
 }
 
@@ -183,7 +183,7 @@ createFeatureTableWithGeometryColumns:(GPKGGeometryColumns *)geometryColumns
   [self verifyWritable];
 
   BOOL created = false;
-  GPKGTileMatrixSetDao *dao = [self getTileMatrixSetDao];
+  GPKGTileMatrixSetDao *dao = self.tileMatrixSetDao;
   if (![dao tableExists]) {
     created = [self.tableCreator createTileMatrixSet] > 0;
   }
@@ -191,7 +191,7 @@ createFeatureTableWithGeometryColumns:(GPKGGeometryColumns *)geometryColumns
   return created;
 }
 
-- (GPKGTileMatrixDao *)getTileMatrixDao {
+- (GPKGTileMatrixDao *)tileMatrixDao {
   return [[GPKGTileMatrixDao alloc] initWithDatabase:self.database];
 }
 
