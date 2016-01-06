@@ -416,6 +416,13 @@ createTileTableWithTableName:(NSString *)tableName
         format:@"Non null Geometry Columns is required to create Feature DAO"];
   }
 
+  // TODO
+  // GeoPackages created with SQLite version 4.2.0+ with GeoPackage
+  // support are not fully supported in previous sqlite versions
+  if (self.writable) {
+    [self dropSQLiteTriggers:geometryColumns];
+  }
+
   // Read the existing table and create the dao
   GPKGFeatureTableReader *tableReader =
       [[GPKGFeatureTableReader alloc] initWithGeometryColumns:geometryColumns];
@@ -425,10 +432,6 @@ createTileTableWithTableName:(NSString *)tableName
       [[GPKGFeatureDao alloc] initWithDatabase:self.database
                                       andTable:featureTable
                             andGeometryColumns:geometryColumns];
-
-  // TODO
-  // GeoPackages created with SQLite version 4.2.0+ with GeoPackage
-  // support are not fully supported in previous sqlite versions
 
   return dao;
 }
