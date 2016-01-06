@@ -6,10 +6,10 @@
 //  Copyright (c) 2015 NGA. All rights reserved.
 //
 
-#import "GPKGGeoPackage.h"
-#import "GPKGGeometryColumnsDao.h"
 #import "GPKGFeatureTableReader.h"
+#import "GPKGGeoPackage.h"
 #import "GPKGGeoPackageTableCreator.h"
+#import "GPKGGeometryColumnsDao.h"
 #import "GPKGTileTableReader.h"
 #import "GPKGUtils.h"
 
@@ -137,13 +137,13 @@ createFeatureTableWithGeometryColumns:(GPKGGeometryColumns *)geometryColumns
   [columns addObject:[GPKGFeatureColumn createPrimaryKeyColumnWithIndex:0
                                                                 andName:@"id"]];
   [columns
-      addObject:
-          [GPKGFeatureColumn
-              createGeometryColumnWithIndex:1
-                                    andName:geometryColumns.columnName
-                            andGeometryType:[geometryColumns getGeometryType]
-                                 andNotNull:false
-                            andDefaultValue:nil]];
+      addObject:[GPKGFeatureColumn
+                    createGeometryColumnWithIndex:1
+                                          andName:geometryColumns.columnName
+                                  andGeometryType:[geometryColumns
+                                                      getGeometryType]
+                                       andNotNull:false
+                                  andDefaultValue:nil]];
   GPKGFeatureTable *table =
       [[GPKGFeatureTable alloc] initWithTable:geometryColumns.tableName
                                    andColumns:columns];
@@ -429,7 +429,6 @@ createTileTableWithTableName:(NSString *)tableName
   // TODO
   // GeoPackages created with SQLite version 4.2.0+ with GeoPackage
   // support are not fully supported in previous sqlite versions
-  [self dropSQLiteTriggers:geometryColumns];
 
   return dao;
 }
