@@ -95,7 +95,7 @@
   return [[GPKGSpatialReferenceSystemDao alloc] initWithDatabase:self.database];
 }
 
-- (GPKGContentsDao *)getContentsDao {
+- (GPKGContentsDao *)contentsDao {
   return [[GPKGContentsDao alloc] initWithDatabase:self.database];
 }
 
@@ -161,7 +161,7 @@ createFeatureTableWithGeometryColumns:(GPKGGeometryColumns *)geometryColumns
     [contents setMaxX:boundingBox.maxLongitude];
     [contents setMaxY:boundingBox.maxLatitude];
     [contents setSrs:srs];
-    [[self getContentsDao] create:contents];
+    [[self contentsDao] create:contents];
 
     // Create new geometry columns
     [geometryColumns setContents:contents];
@@ -192,6 +192,14 @@ createFeatureTableWithGeometryColumns:(GPKGGeometryColumns *)geometryColumns
 }
 
 - (GPKGTileMatrixDao *)tileMatrixDao {
+  return [[GPKGTileMatrixDao alloc] initWithDatabase:self.database];
+}
+
+- (GPKGTileMatrixSetDao *)getTileMatrixSetDao {
+  return [[GPKGTileMatrixSetDao alloc] initWithDatabase:self.database];
+}
+
+- (GPKGTileMatrixDao *)getTileMatrixDao {
   return [[GPKGTileMatrixDao alloc] initWithDatabase:self.database];
 }
 
@@ -249,7 +257,7 @@ createTileTableWithTableName:(NSString *)tableName
     [contents setMaxX:contentsBoundingBox.maxLongitude];
     [contents setMaxY:contentsBoundingBox.maxLatitude];
     [contents setSrs:contentsSrs];
-    [[self getContentsDao] create:contents];
+    [[self contentsDao] create:contents];
 
     // Create new matrix tile set
     tileMatrixSet = [[GPKGTileMatrixSet alloc] init];
@@ -351,7 +359,7 @@ createTileTableWithTableName:(NSString *)tableName
 - (void)deleteUserTable:(NSString *)tableName {
   [self verifyWritable];
 
-  GPKGContentsDao *contentsDao = [self getContentsDao];
+  GPKGContentsDao *contentsDao = [self contentsDao];
   [contentsDao deleteTable:tableName];
 }
 
@@ -441,7 +449,7 @@ createTileTableWithTableName:(NSString *)tableName
     [NSException raise:@"Illegal Argument"
                 format:@"Non null Contents is required to create Feature DAO"];
   }
-  GPKGContentsDao *dao = [self getContentsDao];
+  GPKGContentsDao *dao = [self contentsDao];
   GPKGGeometryColumns *geometryColumns = [dao getGeometryColumns:contents];
   return [self getFeatureDaoWithGeometryColumns:geometryColumns];
 }
@@ -506,7 +514,7 @@ createTileTableWithTableName:(NSString *)tableName
     [NSException raise:@"Illegal Argument"
                 format:@"Non null Contents is required to create Tile DAO"];
   }
-  GPKGContentsDao *dao = [self getContentsDao];
+  GPKGContentsDao *dao = [self contentsDao];
   GPKGTileMatrixSet *tileMatrixSet = [dao getTileMatrixSet:contents];
   return [self getTileDaoWithTileMatrixSet:tileMatrixSet];
 }
