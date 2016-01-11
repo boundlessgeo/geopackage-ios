@@ -14,6 +14,8 @@ FOUNDATION_EXPORT double geopackage_iosVersionNumber;
 //! Project version string for geopackage-ios.
 FOUNDATION_EXPORT const unsigned char geopackage_iosVersionString[];
 
-// In this header, you should import all the public headers of your framework using statements like #import <geopackage_ios/PublicHeader.h>
+// In this header, you should import all the public headers of your framework
+// using statements like #import <geopackage_ios/PublicHeader.h>
 
-
+#import <geopackage-ios/GPKGConnection.h>
+#import <geopackage-ios/GPKGGeoPackage.h>

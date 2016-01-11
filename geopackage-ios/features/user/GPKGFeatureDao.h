@@ -20,12 +20,12 @@
 /**
  *  Geometry Columns
  */
-@property (nonatomic, strong) GPKGGeometryColumns * geometryColumns;
+@property(nonatomic, strong) GPKGGeometryColumns *geometryColumns;
 
 /**
  *  Metadata db
  */
-@property (nonatomic, strong)  GPKGMetadataDb * metadataDb;
+@property(nonatomic, strong) GPKGMetadataDb *metadataDb;
 
 /**
  *  Initialize
@@ -36,14 +36,16 @@
  *
  *  @return new feature dao
  */
--(instancetype) initWithDatabase: (GPKGConnection *) database andTable: (GPKGFeatureTable *) table andGeometryColumns: (GPKGGeometryColumns *) geometryColumns andMetadataDb: (GPKGMetadataDb *) metadataDb;
+- (instancetype)initWithDatabase:(GPKGConnection *)database
+                        andTable:(GPKGFeatureTable *)table
+              andGeometryColumns:(GPKGGeometryColumns *)geometryColumns;
 
 /**
  *  Get the feature table
  *
  *  @return feature table
  */
--(GPKGFeatureTable *) getFeatureTable;
+- (GPKGFeatureTable *)getFeatureTable;
 
 /**
  *  Get the feature row for the current result in the result set
@@ -52,7 +54,7 @@
  *
  *  @return feature row
  */
--(GPKGFeatureRow *) getFeatureRow: (GPKGResultSet *) results;
+- (GPKGFeatureRow *)getFeatureRow:(GPKGResultSet *)results;
 
 /**
  *  Create a new feature row with the column types and values
@@ -62,27 +64,28 @@
  *
  *  @return feature row as user row
  */
--(GPKGUserRow *) newRowWithColumnTypes: (NSArray *) columnTypes andValues: (NSMutableArray *) values;
+- (GPKGUserRow *)newRowWithColumnTypes:(NSArray *)columnTypes
+                             andValues:(NSMutableArray *)values;
 
 /**
  *  Create a new feature row
  *
  *  @return feature row
  */
--(GPKGFeatureRow *) newRow;
+- (GPKGFeatureRow *)newRow;
 
 /**
  *  Get the geometry column name
  *
  *  @return geometry column name
  */
--(NSString *) getGeometryColumnName;
+- (NSString *)getGeometryColumnName;
 
 /**
  *  Get the geometry type
  *
  *  @return geometry type
  */
--(enum WKBGeometryType) getGeometryType;
+- (enum WKBGeometryType)getGeometryType;
 
 @end

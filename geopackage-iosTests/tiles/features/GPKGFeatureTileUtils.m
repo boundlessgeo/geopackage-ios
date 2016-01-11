@@ -174,10 +174,10 @@
 }
 
 +(void) updateLastChangeWithGeoPackage: (GPKGGeoPackage *) geoPackage andFeatureDao: (GPKGFeatureDao *) featureDao{
-    GPKGGeometryColumnsDao * geometryColumnsDao = [geoPackage getGeometryColumnsDao];
+    GPKGGeometryColumnsDao * geometryColumnsDao = geoPackage.geometryColumnsDao;
     GPKGContents * contents = [geometryColumnsDao getContents:featureDao.geometryColumns];
     [contents setLastChange:[NSDate date]];
-    GPKGContentsDao * contentsDao = [geoPackage getContentsDao];
+    GPKGContentsDao * contentsDao = geoPackage.contentsDao;
     [contentsDao update:contents];
 }
 
