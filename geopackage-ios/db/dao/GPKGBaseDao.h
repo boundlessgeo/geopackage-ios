@@ -6,11 +6,11 @@
 //  Copyright (c) 2015 NGA. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "GPKGConnection.h"
 #import "GPKGColumnValue.h"
 #import "GPKGColumnValues.h"
+#import "GPKGConnection.h"
 #import "GPKGProjection.h"
+#import <Foundation/Foundation.h>
 
 /**
  *  Base Data Access Object
@@ -18,34 +18,29 @@
 @interface GPKGBaseDao : NSObject
 
 /**
- *  Database name
- */
-@property (nonatomic, strong) NSString *databaseName;
-
-/**
  *  Database connection
  */
-@property (nonatomic) GPKGConnection *database;
+@property(nonatomic) GPKGConnection *database;
 
 /**
  *  id columns
  */
-@property (nonatomic, strong) NSArray *idColumns;
+@property(nonatomic, strong) NSArray *idColumns;
 
 /**
  *  Columns
  */
-@property (nonatomic, strong) NSArray *columns;
+@property(nonatomic, strong) NSArray *columns;
 
 /**
  *  Table name
  */
-@property (nonatomic, strong) NSString *tableName;
+@property(nonatomic, strong) NSString *tableName;
 
 /**
  *  Mapping between columns and indices
  */
-@property (nonatomic, strong) NSMutableDictionary *columnIndex;
+@property(nonatomic, strong) NSMutableDictionary *columnIndex;
 
 /**
  *  Initialize
@@ -54,19 +49,19 @@
  *
  *  @return new base dao
  */
--(instancetype) initWithDatabase: (GPKGConnection *) database;
+- (instancetype)initWithDatabase:(GPKGConnection *)database;
 
 /**
  *  Initialize the column index
  */
--(void) initializeColumnIndex;
+- (void)initializeColumnIndex;
 
 /**
  *  Does the table exist?
  *
  *  @return true if exists
  */
--(BOOL) tableExists;
+- (BOOL)tableExists;
 
 /**
  *  Get the projection of the object
@@ -75,12 +70,12 @@
  *
  *  @return projection
  */
--(GPKGProjection *) getProjection: (NSObject *) object;
+- (GPKGProjection *)getProjection:(NSObject *)object;
 
 /**
  *  Drop the table
  */
--(void) dropTable;
+- (void)dropTable;
 
 /**
  *  Query for id
@@ -89,7 +84,7 @@
  *
  *  @return result set
  */
--(GPKGResultSet *) queryForId: (NSObject *) idValue;
+- (GPKGResultSet *)queryForId:(NSObject *)idValue;
 
 /**
  *  Query for id object, first object in the result set
@@ -98,7 +93,7 @@
  *
  *  @return object
  */
--(NSObject *) queryForIdObject: (NSObject *) idValue;
+- (NSObject *)queryForIdObject:(NSObject *)idValue;
 
 /**
  *  Query for a multiple id where more than one primary key exists
@@ -107,23 +102,24 @@
  *
  *  @return result set
  */
--(GPKGResultSet *) queryForMultiId: (NSArray *) idValues;
+- (GPKGResultSet *)queryForMultiId:(NSArray *)idValues;
 
 /**
- *  Query for a multiple id object where more than one primary key exists, first object in the result set
+ *  Query for a multiple id object where more than one primary key exists, first
+ * object in the result set
  *
  *  @param idValues id values
  *
  *  @return object
  */
--(NSObject *) queryForMultiIdObject: (NSArray *) idValues;
+- (NSObject *)queryForMultiIdObject:(NSArray *)idValues;
 
 /**
  *  Query for all results
  *
  *  @return result set
  */
--(GPKGResultSet *) queryForAll;
+- (GPKGResultSet *)queryForAll;
 
 /**
  *  Get the current object from the result set
@@ -132,7 +128,7 @@
  *
  *  @return object
  */
--(NSObject *) getObject: (GPKGResultSet *) results;
+- (NSObject *)getObject:(GPKGResultSet *)results;
 
 /**
  *  Get the first object from the result set
@@ -141,7 +137,7 @@
  *
  *  @return object
  */
--(NSObject *) getFirstObject: (GPKGResultSet *)results;
+- (NSObject *)getFirstObject:(GPKGResultSet *)results;
 
 /**
  *  Raw query for results
@@ -150,7 +146,7 @@
  *
  *  @return result set
  */
--(GPKGResultSet *) rawQuery: (NSString *) query;
+- (GPKGResultSet *)rawQuery:(NSString *)query;
 
 /**
  *  Raw query for results with args
@@ -160,7 +156,7 @@
  *
  *  @return result set
  */
--(GPKGResultSet *) rawQuery: (NSString *) query andArgs: (NSArray *) args;
+- (GPKGResultSet *)rawQuery:(NSString *)query andArgs:(NSArray *)args;
 
 /**
  *  Get the values from a result set with only one column
@@ -169,7 +165,7 @@
  *
  *  @return single column values
  */
--(NSArray *) singleColumnResults: (GPKGResultSet *) results;
+- (NSArray *)singleColumnResults:(GPKGResultSet *)results;
 
 /**
  *  Query for field equality
@@ -179,7 +175,8 @@
  *
  *  @return result set
  */
--(GPKGResultSet *) queryForEqWithField: (NSString *) field andValue: (NSObject *) value;
+- (GPKGResultSet *)queryForEqWithField:(NSString *)field
+                              andValue:(NSObject *)value;
 
 /**
  *  Query for field equality
@@ -192,11 +189,11 @@
  *
  *  @return result set
  */
--(GPKGResultSet *) queryForEqWithField: (NSString *) field
-                              andValue: (NSObject *) value
-                              andGroupBy: (NSString *) groupBy
-                              andHaving: (NSString *) having
-                              andOrderBy: (NSString *) orderBy;
+- (GPKGResultSet *)queryForEqWithField:(NSString *)field
+                              andValue:(NSObject *)value
+                            andGroupBy:(NSString *)groupBy
+                             andHaving:(NSString *)having
+                            andOrderBy:(NSString *)orderBy;
 
 /**
  *  Query for field equality
@@ -206,7 +203,8 @@
  *
  *  @return result set
  */
--(GPKGResultSet *) queryForEqWithField: (NSString *) field andColumnValue: (GPKGColumnValue *) value;
+- (GPKGResultSet *)queryForEqWithField:(NSString *)field
+                        andColumnValue:(GPKGColumnValue *)value;
 
 /**
  *  Query for field values
@@ -215,7 +213,7 @@
  *
  *  @return result set
  */
--(GPKGResultSet *) queryForFieldValues: (GPKGColumnValues *) fieldValues;
+- (GPKGResultSet *)queryForFieldValues:(GPKGColumnValues *)fieldValues;
 
 /**
  *  Query for column value field values
@@ -224,7 +222,8 @@
  *
  *  @return result set
  */
--(GPKGResultSet *) queryForColumnValueFieldValues: (GPKGColumnValues *) fieldValues;
+- (GPKGResultSet *)queryForColumnValueFieldValues:
+    (GPKGColumnValues *)fieldValues;
 
 /**
  *  Query where
@@ -234,7 +233,8 @@
  *
  *  @return result set
  */
--(GPKGResultSet *) queryWhere: (NSString *) where andWhereArgs: (NSArray *) whereArgs;
+- (GPKGResultSet *)queryWhere:(NSString *)where
+                 andWhereArgs:(NSArray *)whereArgs;
 
 /**
  *  Query where
@@ -247,11 +247,11 @@
  *
  *  @return result set
  */
--(GPKGResultSet *) queryWhere: (NSString *) where
-                              andWhereArgs: (NSArray *) whereArgs
-                              andGroupBy: (NSString *) groupBy
-                              andHaving: (NSString *) having
-                              andOrderBy: (NSString *) orderBy;
+- (GPKGResultSet *)queryWhere:(NSString *)where
+                 andWhereArgs:(NSArray *)whereArgs
+                   andGroupBy:(NSString *)groupBy
+                    andHaving:(NSString *)having
+                   andOrderBy:(NSString *)orderBy;
 
 /**
  *  Query where
@@ -265,12 +265,12 @@
  *
  *  @return result set
  */
--(GPKGResultSet *) queryWhere: (NSString *) where
-                              andWhereArgs: (NSArray *) whereArgs
-                              andGroupBy: (NSString *) groupBy
-                              andHaving: (NSString *) having
-                              andOrderBy: (NSString *) orderBy
-                              andLimit: (NSString *) limit;
+- (GPKGResultSet *)queryWhere:(NSString *)where
+                 andWhereArgs:(NSArray *)whereArgs
+                   andGroupBy:(NSString *)groupBy
+                    andHaving:(NSString *)having
+                   andOrderBy:(NSString *)orderBy
+                     andLimit:(NSString *)limit;
 
 /**
  *  Query columns where
@@ -284,12 +284,12 @@
  *
  *  @return result set
  */
--(GPKGResultSet *) queryColumns: (NSArray *) columns
-                       andWhere: (NSString *) where
-                   andWhereArgs: (NSArray *) whereArgs
-                     andGroupBy: (NSString *) groupBy
-                      andHaving: (NSString *) having
-                     andOrderBy: (NSString *) orderBy;
+- (GPKGResultSet *)queryColumns:(NSArray *)columns
+                       andWhere:(NSString *)where
+                   andWhereArgs:(NSArray *)whereArgs
+                     andGroupBy:(NSString *)groupBy
+                      andHaving:(NSString *)having
+                     andOrderBy:(NSString *)orderBy;
 
 /**
  *  Query columns where
@@ -304,13 +304,13 @@
  *
  *  @return result set
  */
--(GPKGResultSet *) queryColumns: (NSArray *) columns
-                       andWhere: (NSString *) where
-                   andWhereArgs: (NSArray *) whereArgs
-                     andGroupBy: (NSString *) groupBy
-                      andHaving: (NSString *) having
-                     andOrderBy: (NSString *) orderBy
-                       andLimit: (NSString *) limit;
+- (GPKGResultSet *)queryColumns:(NSArray *)columns
+                       andWhere:(NSString *)where
+                   andWhereArgs:(NSArray *)whereArgs
+                     andGroupBy:(NSString *)groupBy
+                      andHaving:(NSString *)having
+                     andOrderBy:(NSString *)orderBy
+                       andLimit:(NSString *)limit;
 
 /**
  *  Check if id exists
@@ -319,7 +319,7 @@
  *
  *  @return true if exists
  */
--(BOOL) idExists: (NSObject *) id;
+- (BOOL)idExists:(NSObject *)id;
 
 /**
  *  Check if multiple id exists
@@ -328,7 +328,7 @@
  *
  *  @return true if exists
  */
--(BOOL) multiIdExists: (NSArray *) idValues;
+- (BOOL)multiIdExists:(NSArray *)idValues;
 
 /**
  *  Query for the same id as the object
@@ -337,22 +337,22 @@
  *
  *  @return object
  */
--(NSObject *) queryForSameId: (NSObject *) object;
+- (NSObject *)queryForSameId:(NSObject *)object;
 
 /**
  *  Begin an exclusive transaction on the database
  */
--(void) beginTransaction;
+- (void)beginTransaction;
 
 /**
  *  Commit an active transaction
  */
--(void) commitTransaction;
+- (void)commitTransaction;
 
 /**
  *  Rollback an active transaction
  */
--(void) rollbackTransaction;
+- (void)rollbackTransaction;
 
 /**
  *  Update the object
@@ -361,7 +361,7 @@
  *
  *  @return rows updated
  */
--(int) update: (NSObject *) object;
+- (int)update:(NSObject *)object;
 
 /**
  *  Update where with values
@@ -372,7 +372,9 @@
  *
  *  @return rows updated
  */
--(int) updateWithValues: (GPKGContentValues *) values andWhere: (NSString *) where andWhereArgs: (NSArray *) whereArgs;
+- (int)updateWithValues:(GPKGContentValues *)values
+               andWhere:(NSString *)where
+           andWhereArgs:(NSArray *)whereArgs;
 
 /**
  *  Delete object
@@ -381,7 +383,7 @@
  *
  *  @return rows deleted
  */
--(int) delete: (NSObject *) object;
+- (int) delete:(NSObject *)object;
 
 /**
  *  Delete by id
@@ -390,7 +392,7 @@
  *
  *  @return rows deleted
  */
--(int) deleteById: (NSObject *) idValue;
+- (int)deleteById:(NSObject *)idValue;
 
 /**
  *  Delete by multiple id values
@@ -399,7 +401,7 @@
  *
  *  @return rows deleted
  */
--(int) deleteByMultiId: (NSArray *) idValues;
+- (int)deleteByMultiId:(NSArray *)idValues;
 
 /**
  *  Delete where
@@ -409,7 +411,7 @@
  *
  *  @return rows deleted
  */
--(int) deleteWhere: (NSString *) where andWhereArgs: (NSArray *) whereArgs;
+- (int)deleteWhere:(NSString *)where andWhereArgs:(NSArray *)whereArgs;
 
 /**
  *  Create object, same as calling insert
@@ -418,7 +420,7 @@
  *
  *  @return insertion id
  */
--(long long) create: (NSObject *) object;
+- (long long)create:(NSObject *)object;
 
 /**
  *  Insert object
@@ -427,7 +429,7 @@
  *
  *  @return insertion id
  */
--(long long) insert: (NSObject *) object;
+- (long long)insert:(NSObject *)object;
 
 /**
  *  Create if does not exist
@@ -436,7 +438,7 @@
  *
  *  @return insertion id if created
  */
--(long long) createIfNotExists: (NSObject *) object;
+- (long long)createIfNotExists:(NSObject *)object;
 
 /**
  *  Create if does not exist or update if it does
@@ -445,7 +447,7 @@
  *
  *  @return insertion id if created
  */
--(long long) createOrUpdate: (NSObject *) object;
+- (long long)createOrUpdate:(NSObject *)object;
 
 /**
  *  Get the id of the object
@@ -454,7 +456,7 @@
  *
  *  @return id value
  */
--(NSObject *) getId: (NSObject *) object;
+- (NSObject *)getId:(NSObject *)object;
 
 /**
  *  Get the multiple id values of the object
@@ -463,7 +465,7 @@
  *
  *  @return id values in an array
  */
--(NSArray *) getMultiId: (NSObject *) object;
+- (NSArray *)getMultiId:(NSObject *)object;
 
 /**
  *  Set the object id
@@ -471,7 +473,7 @@
  *  @param object object
  *  @param id     id
  */
--(void) setId: (NSObject *) object withIdValue: (NSObject *) id;
+- (void)setId:(NSObject *)object withIdValue:(NSObject *)id;
 
 /**
  *  Set the object multiple id
@@ -479,7 +481,7 @@
  *  @param object   object
  *  @param idValues id values
  */
--(void) setMultiId: (NSObject *) object withIdValues: (NSArray *) idValues;
+- (void)setMultiId:(NSObject *)object withIdValues:(NSArray *)idValues;
 
 /**
  *  Build primary key where clause with id value
@@ -488,7 +490,7 @@
  *
  *  @return pk where clause
  */
--(NSString *) buildPkWhereWithValue: (NSObject *) idValue;
+- (NSString *)buildPkWhereWithValue:(NSObject *)idValue;
 
 /**
  *  Build primary key where args
@@ -497,7 +499,7 @@
  *
  *  @return pk where args
  */
--(NSArray *) buildPkWhereArgsWithValue: (NSObject *) idValue;
+- (NSArray *)buildPkWhereArgsWithValue:(NSObject *)idValue;
 
 /**
  *  Build primary key where clause with id values
@@ -506,7 +508,7 @@
  *
  *  @return where clause
  */
--(NSString *) buildPkWhereWithValues: (NSArray *) idValues;
+- (NSString *)buildPkWhereWithValues:(NSArray *)idValues;
 
 /**
  *  Build where clause with fields
@@ -515,7 +517,7 @@
  *
  *  @return where clause
  */
--(NSString *) buildWhereWithFields: (GPKGColumnValues *) fields;
+- (NSString *)buildWhereWithFields:(GPKGColumnValues *)fields;
 
 /**
  *  Build where clause with column value fields
@@ -524,7 +526,7 @@
  *
  *  @return where clause
  */
--(NSString *) buildWhereWithColumnValueFields: (GPKGColumnValues *) fields;
+- (NSString *)buildWhereWithColumnValueFields:(GPKGColumnValues *)fields;
 
 /**
  *  Build where clause with field and value
@@ -534,7 +536,7 @@
  *
  *  @return where clause
  */
--(NSString *) buildWhereWithField: (NSString *) field andValue: (NSObject *) value;
+- (NSString *)buildWhereWithField:(NSString *)field andValue:(NSObject *)value;
 
 /**
  *  Build where clause with field, value, and operation
@@ -545,7 +547,9 @@
  *
  *  @return where clause
  */
--(NSString *) buildWhereWithField: (NSString *) field andValue: (NSObject *) value andOperation: (NSString *) operation;
+- (NSString *)buildWhereWithField:(NSString *)field
+                         andValue:(NSObject *)value
+                     andOperation:(NSString *)operation;
 
 /**
  *  Build where clause with field and column value
@@ -555,7 +559,8 @@
  *
  *  @return where clause
  */
--(NSString *) buildWhereWithField: (NSString *) field andColumnValue: (GPKGColumnValue *) value;
+- (NSString *)buildWhereWithField:(NSString *)field
+                   andColumnValue:(GPKGColumnValue *)value;
 
 /**
  *  Build where args with column values
@@ -564,7 +569,7 @@
  *
  *  @return where args
  */
--(NSArray *) buildWhereArgsWithValues: (GPKGColumnValues *) values;
+- (NSArray *)buildWhereArgsWithValues:(GPKGColumnValues *)values;
 
 /**
  *  Build where args with values
@@ -573,7 +578,7 @@
  *
  *  @return where args
  */
--(NSArray *) buildWhereArgsWithValueArray: (NSArray *) values;
+- (NSArray *)buildWhereArgsWithValueArray:(NSArray *)values;
 
 /**
  *  Build where args with column values
@@ -582,7 +587,7 @@
  *
  *  @return where args
  */
--(NSArray *) buildWhereArgsWithColumnValues: (GPKGColumnValues *) values;
+- (NSArray *)buildWhereArgsWithColumnValues:(GPKGColumnValues *)values;
 
 /**
  *  Build where args with value
@@ -591,7 +596,7 @@
  *
  *  @return where args
  */
--(NSArray *) buildWhereArgsWithValue: (NSObject *) value;
+- (NSArray *)buildWhereArgsWithValue:(NSObject *)value;
 
 /**
  *  Build where args with column value
@@ -600,14 +605,14 @@
  *
  *  @return where args
  */
--(NSArray *) buildWhereArgsWithColumnValue: (GPKGColumnValue *) value;
+- (NSArray *)buildWhereArgsWithColumnValue:(GPKGColumnValue *)value;
 
 /**
  *  Get the total result count
  *
  *  @return count
  */
--(int) count;
+- (int)count;
 
 /**
  *  Get the count where
@@ -616,7 +621,7 @@
  *
  *  @return count
  */
--(int) countWhere: (NSString *) where;
+- (int)countWhere:(NSString *)where;
 
 /**
  *  Get the count where
@@ -626,6 +631,6 @@
  *
  *  @return count
  */
--(int) countWhere: (NSString *) where andWhereArgs: (NSArray *) args;
+- (int)countWhere:(NSString *)where andWhereArgs:(NSArray *)args;
 
 @end

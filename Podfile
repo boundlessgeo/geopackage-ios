@@ -6,6 +6,7 @@ inhibit_all_warnings!
 pod 'AFNetworking', '~> 2.1'
 pod 'proj4', '~> 4.8'
 pod 'wkb-ios', '~> 1.0'
+pod 'FMDB'
 
 target :"geopackage-iosTests", :exclusive => true do
   pod 'geopackage-ios', :path => '.'

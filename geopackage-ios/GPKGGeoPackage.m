@@ -31,8 +31,18 @@
     self.writable = writable;
     self.tableCreator =
         [[GPKGGeoPackageTableCreator alloc] initWithDatabase:database];
+    [self dropTriggersOnInit];
   }
   return self;
+}
+
+- (void)dropTriggersOnInit {
+  NSArray *featureTables = [self featureTables];
+  [featureTables enumerateObjectsUsingBlock:^(NSString *tableName,
+                                              NSUInteger idx, BOOL *stop) {
+    GPKGFeatureDao *fDao = [self getFeatureDaoWithTableName:tableName];
+    [self dropSQLiteTriggers:fDao.geometryColumns];
+  }];
 }
 
 - (void)close {
@@ -422,13 +432,6 @@ createTileTableWithTableName:(NSString *)tableName
     [NSException
          raise:@"Illegal Argument"
         format:@"Non null Geometry Columns is required to create Feature DAO"];
-  }
-
-  // TODO
-  // GeoPackages created with SQLite version 4.2.0+ with GeoPackage
-  // support are not fully supported in previous sqlite versions
-  if (self.writable) {
-    [self dropSQLiteTriggers:geometryColumns];
   }
 
   // Read the existing table and create the dao
